@@ -33,17 +33,34 @@ public class EmailEntry extends JFrame
 	{
 		super();
 
+		/**
+		 * Attempt to open the target file
+		 */
 		out = new BufferedWriter(new FileWriter(FILE, true));
 
-		setContentPane(new JLabel(new ImageIcon(BACKGROUND)));
-
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-		Font typeFont = this.getContentPane().getFont().deriveFont((float)48);
-		Font mainFont = this.getContentPane().getFont().deriveFont((float)54);
+		/**
+		 * Manual layout and sizing, defaulting to maximised
+		 */
 		setLayout(null);
 		setSize(900, 500);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+		/**
+		 * Set up the background image
+		 */
+		setContentPane(new JLabel(new ImageIcon(BACKGROUND)));
+
+		/**
+		 * Configure the fonts and colors the components will use
+		 */
+		Font typeFont = this.getContentPane().getFont().deriveFont((float)48);
+		Font mainFont = this.getContentPane().getFont().deriveFont((float)54);
+		Color textColor = Color.WHITE;
+
+		/**
+		 * Email address field and label
+		 */
 		JLabel lblAddy = new JLabel("Email Address:", SwingConstants.LEFT);
 		lblAddy.setFont(mainFont);
 		lblAddy.setForeground(Color.white);
@@ -55,6 +72,9 @@ public class EmailEntry extends JFrame
 		txtAddy.setBounds(50, 80, 800, 80);
 		add(txtAddy);
 
+		/**
+		 * Name field and label
+		 */
 		JLabel lblName = new JLabel("Name (Optional):", SwingConstants.LEFT);
 		lblName.setFont(mainFont);
 		lblName.setForeground(Color.white);
@@ -66,13 +86,17 @@ public class EmailEntry extends JFrame
 		txtName.setBounds(50, 230, 800, 80);
 		add(txtName);
 
+		/**
+		 * Submit button
+		 */
 		final JButton cmdSubmit = new JButton("Submit");
 		cmdSubmit.setFont(mainFont);
 		cmdSubmit.setBounds(600, 340, 250, 80);
 		add(cmdSubmit);
 
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+		/**
+		 * Add code to write to file when submit is clicked
+		 */
 		cmdSubmit.addActionListener(
 			new ActionListener()
 			{
@@ -100,6 +124,9 @@ public class EmailEntry extends JFrame
 			}
 		);
 
+		/**
+		 * Automatically submit when the enter key is pressed on any field
+		 */
 		KeyListener k = new KeyListener()
 		{
 			@Override public void keyTyped(KeyEvent e) {}
@@ -115,9 +142,15 @@ public class EmailEntry extends JFrame
 		txtName.addKeyListener(k);
 		cmdSubmit.addKeyListener(k);
 
+		/**
+		 * Show the window
+		 */
 		setVisible(true);
 	}
 
+	/**
+	 * Make sure the file is written to when the application is closed
+	 */
 	@Override
 	public void dispose()
 	{
@@ -136,6 +169,10 @@ public class EmailEntry extends JFrame
 		}
 	}
 
+	/**
+	 * Program launch
+	 * @throws IOException if the target file can not be opened
+	 */
 	public static void main(String [] args) throws IOException
 	{
 		new EmailEntry();
