@@ -21,7 +21,7 @@ import javax.swing.WindowConstants;
 
 public class EmailEntry extends JFrame
 {
-	private final static String FILE = "E:/test.txt";
+	private final static String FILE = "emails.tsv";
 	private final static String BACKGROUND = "./background.png";
 	private final static long serialVersionUID = 1L;
 
