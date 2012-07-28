@@ -9,11 +9,11 @@ Configuration
 
 Configuration is designed to be done via direct editing of the source code.
 The basic version shown here:
-	- Uses a white font
-	- Is designed to be at least 900x500 pixels
-	- Maximises itself by default
-	- Loads background.png as a background image
-	- Writes out to emails.tsv in the format "<email><tab><name>"
+ - Uses a white font
+ - Is designed to be at least 900x500 pixels
+ - Maximises itself by default
+ - Loads background.png as a background image
+ - Writes out to emails.tsv in the format "&lt;email&gt;&lt;tab&gt;&lt;name&gt;"
 
 Building and running
 --------------------
