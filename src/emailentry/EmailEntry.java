@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,22 +19,19 @@ import javax.swing.WindowConstants;
 
 public class EmailEntry extends JFrame
 {
-	private final static String FILE = "emails.tsv";
 	private final static String BACKGROUND = "./background.png";
 	private final static long serialVersionUID = 1L;
 
 	private final JTextField txtAddy;
 	private final JTextField txtName;
-	private final BufferedWriter out;
+
+	private final IReg regist;
 
 	public EmailEntry() throws IOException
 	{
 		super();
 
-		/**
-		 * Attempt to open the target file
-		 */
-		out = new BufferedWriter(new FileWriter(FILE, true));
+		regist = new TextFile(); // Or new MailmanLink("list-name");
 
 		/**
 		 * Manual layout and sizing, defaulting to maximised
@@ -106,16 +101,7 @@ public class EmailEntry extends JFrame
 					if (txtAddy.getText().isEmpty())
 						return;
 
-					try
-					{
-						out.write(String.format("%s\t%s\n", txtAddy.getText(), txtName.getText()));
-						out.flush();
-					}
-					catch (IOException ex)
-					{
-						Logger.getLogger("EmailEntry").log(Level.SEVERE, null, ex);
-						return;
-					}
+					regist.regist(txtAddy.getText(), txtName.getText());
 
 					txtAddy.setText("");
 					txtName.setText("");
@@ -146,27 +132,6 @@ public class EmailEntry extends JFrame
 		 * Show the window
 		 */
 		setVisible(true);
-	}
-
-	/**
-	 * Make sure the file is written to when the application is closed
-	 */
-	@Override
-	public void dispose()
-	{
-		try
-		{
-			out.flush();
-			out.close();
-		}
-		catch (IOException ex)
-		{
-			Logger.getLogger("EmailEntry").log(Level.SEVERE, null, ex);
-		}
-		finally
-		{
-			super.dispose();
-		}
 	}
 
 	/**

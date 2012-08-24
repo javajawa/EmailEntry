@@ -1,4 +1,2 @@
-*
-!readme.md
-!.gitignore
-!src
+*.class
+
