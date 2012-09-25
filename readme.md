@@ -13,18 +13,27 @@ The basic version shown here:
  - Is designed to be at least 900x500 pixels
  - Maximises itself by default
  - Loads background.png as a background image
- - Writes out to emails.tsv in the format "&lt;email&gt;&lt;tab&gt;&lt;name&gt;"
+
+Two modules are supplied for handling the data.
+ - TextFile writes out to emails.tsv in the format "&lt;email&gt;&lt;tab&gt;&lt;name&gt;"
+ - MailmanLink directly accesses Imperial's mailman server to subscribe people
+
+You can select the method you wish to use in the EmailEntry constructor, around
+line 30 in EmailEntry.java (see the comments).
+
+You can also define your own implementations of the IReg interface for use.
 
 Building and running
 --------------------
 
 The class can be built using your favourite java compiler.
+A Makefile is provided, which essentially wrap the command
 
-``` javac src/emailentry/emailentry.java -d build ```
+``` javac -classpath src/ -d build/ src/emailentry/EmailEntry.java ```
 
-And then run with the java command
+Run with java
 
-``` java build/emailenry/emailentry.java ```
+``` java -classpath /path/to/build/folder emailentry.EmailEntry ```
 
 License
 -------
